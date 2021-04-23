@@ -1,13 +1,16 @@
 import styled from 'styled-components'
+import BooksList from '../components/BooksList/BooksList'
 
 export default function HomaPage() {
   return (
     <PageWrapper>
       <Title>Books Library</Title>
-			<ContentWrapper>
-				<LeftWrapper></LeftWrapper>
-				<RightWrapper></RightWrapper>
-			</ContentWrapper>
+      <ContentWrapper>
+        <LeftWrapper>
+          <BooksList />
+        </LeftWrapper>
+        <RightWrapper></RightWrapper>
+      </ContentWrapper>
     </PageWrapper>
   )
 }
@@ -34,10 +37,11 @@ export const LeftWrapper = styled.div`
   border: 1px solid green;
 	height: 500px;
 	width: 65%;
+	padding: 30px;
 `
 
 export const RightWrapper = styled.div`
-  border: 1px solid green;
+  border: 1px solid black;
   height: 500px;
 	width:35%;
 `
