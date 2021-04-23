@@ -1,9 +1,15 @@
 import styled from 'styled-components'
 import { Card, Button } from '@material-ui/core'
+import { useQuery, gql } from '@apollo/client'
 
-export default function BooksList() {
-
-	
+export default function BookList() {
+  const allBooks = gql`
+    query getAllBooks {
+      Books {
+        name
+      }
+    }
+  `
 
   return (
     <CustomCard elevation={2}>
