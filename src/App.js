@@ -1,10 +1,7 @@
+import HomaPage from './pages/HomePage'
 
 function App() {
-  return (
-    <div >
-			hello app
-    </div>
-  );
+  return <HomaPage />
 }
 
-export default App;
+export default App
