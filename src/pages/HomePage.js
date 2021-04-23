@@ -4,6 +4,10 @@ export default function HomaPage() {
   return (
     <PageWrapper>
       <Title>Books Library</Title>
+			<ContentWrapper>
+				<LeftWrapper></LeftWrapper>
+				<RightWrapper></RightWrapper>
+			</ContentWrapper>
     </PageWrapper>
   )
 }
@@ -11,7 +15,6 @@ export default function HomaPage() {
 /*---> Styles <---*/
 export const PageWrapper = styled.div`
   border: 1px solid red;
-	height: 1000px;
 `
 
 export const Title = styled.div`
@@ -20,4 +23,21 @@ export const Title = styled.div`
 	font-weight: bold;
 	text-align: center;
 	margin-top: 20px;
+`
+
+export const ContentWrapper = styled.div`
+  border: 1px solid yellow;
+	display: flex;
+`
+
+export const LeftWrapper = styled.div`
+  border: 1px solid green;
+	height: 500px;
+	width: 65%;
+`
+
+export const RightWrapper = styled.div`
+  border: 1px solid green;
+  height: 500px;
+	width:35%;
 `
