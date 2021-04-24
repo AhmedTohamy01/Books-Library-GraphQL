@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import BookList from '../components/BookList/BookList'
 import Display from '../components/Display/Display'
+import { PlusCircle } from '@styled-icons/boxicons-solid/'
+import Modal from '@material-ui/core/Modal'
 
 export default function HomaPage() {
   const [bookID, setBookID] = useState('')
@@ -17,9 +19,16 @@ export default function HomaPage() {
           <Display bookID={bookID} />
         </RightWrapper>
       </ContentWrapper>
+      <AddIcon />
     </PageWrapper>
   )
 }
+
+export const StyledModal = styled(Modal)`
+  /* border: 1px solid red; */
+  background-color: white !important;
+  height: 300px;
+`
 
 /*---> Styles <---*/
 export const PageWrapper = styled.div`
@@ -49,4 +58,14 @@ export const RightWrapper = styled.div`
   /* border: 1px solid black; */
   width: 35%;
   padding: 30px;
+`
+
+export const AddIcon = styled(PlusCircle)`
+  /* border: 1px solid black; */
+  width: 70px;
+  position: fixed;
+  left: 93vw;
+  bottom: 10px;
+  color: #3f51b5;
+  cursor: pointer;
 `
