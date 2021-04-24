@@ -1,15 +1,21 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import BookList from '../components/BookList/BookList'
+import Display from '../components/Display/Display'
 
 export default function HomaPage() {
+  const [bookID, setBookID] = useState('')
+
   return (
     <PageWrapper>
       <Title>Books Library</Title>
       <ContentWrapper>
         <LeftWrapper>
-          <BookList />
+          <BookList setBookID={setBookID} />
         </LeftWrapper>
-        <RightWrapper></RightWrapper>
+        <RightWrapper>
+          <Display bookID={bookID} />
+        </RightWrapper>
       </ContentWrapper>
     </PageWrapper>
   )
@@ -17,7 +23,7 @@ export default function HomaPage() {
 
 /*---> Styles <---*/
 export const PageWrapper = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
 `
 
 export const Title = styled.div`
@@ -29,19 +35,18 @@ export const Title = styled.div`
 `
 
 export const ContentWrapper = styled.div`
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
   display: flex;
 `
 
 export const LeftWrapper = styled.div`
-  border: 1px solid green;
-  height: 500px;
+  /* border: 1px solid green; */
   width: 65%;
   padding: 30px;
 `
 
 export const RightWrapper = styled.div`
-  border: 1px solid black;
-  height: 500px;
+  /* border: 1px solid black; */
   width: 35%;
+  padding: 30px;
 `
