@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import BookList from '../components/BookList/BookList'
 import Display from '../components/Display/Display'
 import { PlusCircle } from '@styled-icons/boxicons-solid/'
-import Modal from '@material-ui/core/Modal'
+import AddModal from '../components/AddModal/AddModal'
 
 export default function HomaPage() {
   const [bookID, setBookID] = useState('')
+  const [showAddModal, setShowAddModal] = useState(false)
 
   return (
     <PageWrapper>
@@ -19,16 +20,11 @@ export default function HomaPage() {
           <Display bookID={bookID} />
         </RightWrapper>
       </ContentWrapper>
-      <AddIcon />
+      <AddIcon onClick={() => setShowAddModal(true)} />
+      {showAddModal ? <AddModal setShowAddModal={setShowAddModal} /> : null}
     </PageWrapper>
   )
 }
-
-export const StyledModal = styled(Modal)`
-  /* border: 1px solid red; */
-  background-color: white !important;
-  height: 300px;
-`
 
 /*---> Styles <---*/
 export const PageWrapper = styled.div`
