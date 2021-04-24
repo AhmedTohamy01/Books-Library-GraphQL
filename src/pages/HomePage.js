@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import BookList from '../components/BookList/BookList'
 import Display from '../components/Display/Display'
 import { PlusCircle } from '@styled-icons/boxicons-solid/'
-import AddModal from '../components/AddModal/AddModal'
+import Modal from '../components/Modal/Modal'
 
 export default function HomaPage() {
   const [bookID, setBookID] = useState('')
-  const [showAddModal, setShowAddModal] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   return (
     <PageWrapper>
@@ -20,8 +20,8 @@ export default function HomaPage() {
           <Display bookID={bookID} />
         </RightWrapper>
       </ContentWrapper>
-      <AddIcon onClick={() => setShowAddModal(true)} />
-      {showAddModal ? <AddModal setShowAddModal={setShowAddModal} /> : null}
+      <AddIcon onClick={() => setShowModal(true)} />
+      {showModal ? <Modal setShowModal={setShowModal} /> : null}
     </PageWrapper>
   )
 }

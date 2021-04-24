@@ -24,8 +24,6 @@ export default function BookList({ bookID }) {
     variables: { bookID },
   })
 
-  console.log('data', data)
-
   if (loading)
     return (
       <>
