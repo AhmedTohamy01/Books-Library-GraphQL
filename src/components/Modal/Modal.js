@@ -4,9 +4,16 @@ import Button from '@material-ui/core/Button'
 import { CloseCircleOutline } from '@styled-icons/evaicons-outline/'
 import TextField from '@material-ui/core/TextField'
 import { useQuery, gql } from '@apollo/client'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
 
 export default function Modal({ setShowModal }) {
   const [activeModal, setActiveModal] = useState('add')
+  const [authorName, setAuthorName] = useState('')
+  const [authorAge, setAuthorAge] = useState(null)
+  const [bookName, setBookName] = useState('')
+  const [bookGenre, setBookGenre] = useState('')
+  const [bookAuthor, setBookAuthor] = useState('')
 
   const authors = gql`
     query {
@@ -52,6 +59,7 @@ export default function Modal({ setShowModal }) {
             label='Author Name'
             type='text'
             variant='outlined'
+            onChange={(event) => setAuthorName(event.target.value)}
           />
           <StyledInput
             autoComplete='off'
@@ -59,6 +67,7 @@ export default function Modal({ setShowModal }) {
             label='Author Age'
             type='number'
             variant='outlined'
+            onChange={(event) => setAuthorAge(event.target.value)}
           />
           <SubmitButton variant='contained' color='primary'>
             Submit
@@ -75,6 +84,7 @@ export default function Modal({ setShowModal }) {
             label='Book Name'
             type='text'
             variant='outlined'
+            onChange={(event) => setBookName(event.target.value)}
           />
           <StyledInput
             autoComplete='off'
@@ -82,24 +92,26 @@ export default function Modal({ setShowModal }) {
             label='Book Genre'
             type='text'
             variant='outlined'
+            onChange={(event) => setBookGenre(event.target.value)}
           />
-          <StyledInput
+          <StyledSelect
+            id='select-author'
+            label='Author Name'
+            variant='outlined'
             select
             SelectProps={{
               native: true,
             }}
-            id='select-author'
-            label='Author Name'
-            variant='outlined'
             helperText='Select author from the list'
-            // onChange={handleChange}
+            onChange={(event) => setBookAuthor(event.target.value)}
           >
+            <option value=''></option>
             {data.authors.map((item, index) => (
               <option key={index} value={item.name}>
                 {item.name}
               </option>
             ))}
-          </StyledInput>
+          </StyledSelect>
           <SubmitButton variant='contained' color='primary'>
             Submit
           </SubmitButton>
@@ -136,6 +148,14 @@ export const BookModal = styled.div`
 export const StyledInput = styled(TextField)`
   width: 70% !important;
   height: 40px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 50px !important;
+`
+
+export const StyledSelect = styled(TextField)`
+  width: 70% !important;
+  /* height: 40px !important; */
   margin-left: auto !important;
   margin-right: auto !important;
   margin-bottom: 50px !important;
