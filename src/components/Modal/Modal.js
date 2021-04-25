@@ -3,14 +3,14 @@ import styled from 'styled-components'
 import Button from '@material-ui/core/Button'
 import { CloseCircleOutline } from '@styled-icons/evaicons-outline/'
 import TextField from '@material-ui/core/TextField'
-import { useQuery, gql } from '@apollo/client'
+import { useQuery, gql, useMutation } from '@apollo/client'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 
 export default function Modal({ setShowModal }) {
   const [activeModal, setActiveModal] = useState('add')
   const [authorName, setAuthorName] = useState('')
-  const [authorAge, setAuthorAge] = useState(null)
+  const [authorAge, setAuthorAge] = useState(0)
   const [bookName, setBookName] = useState('')
   const [bookGenre, setBookGenre] = useState('')
   const [bookAuthor, setBookAuthor] = useState('')
@@ -19,10 +19,59 @@ export default function Modal({ setShowModal }) {
     query {
       authors {
         name
+        id
       }
     }
   `
   const { loading, error, data } = useQuery(authors)
+
+  const ADD_AUTHOR = gql`
+    mutation($name: String!, $age: Int!) {
+      addAuthor(name: $name, age: $age) {
+        name
+        age
+      }
+    }
+  `
+  const [addAuthor] = useMutation(ADD_AUTHOR)
+
+  function handleAuthorSubmit(event) {
+    event.preventDefault()
+    addAuthor({
+      variables: {
+        name: authorName,
+        age: parseInt(authorAge),
+      },
+    })
+    setAuthorName('')
+    setAuthorAge(0)
+    setShowModal(false)
+  }
+
+  const ADD_BOOK = gql`
+    mutation($name: String!, $genre: String!, $authorId: String!) {
+      addBook(name: $name, genre: $genre, authorId: $authorId) {
+        name
+        genre
+      }
+    }
+  `
+  const [addBook] = useMutation(ADD_BOOK)
+
+  function handleBookSubmit(event) {
+    event.preventDefault()
+    addBook({
+      variables: {
+        name: bookName,
+        genre: bookGenre,
+        authorId: bookAuthor,
+      },
+    })
+    setBookName('')
+    setBookGenre('')
+    setBookAuthor('')
+    setShowModal(false)
+  }
 
   return (
     <Overlay>
@@ -53,76 +102,82 @@ export default function Modal({ setShowModal }) {
           <CloseIconWrapper>
             <CloseIcon onClick={() => setShowModal(false)} />
           </CloseIconWrapper>
-          <StyledInput
-            autoComplete='off'
-            id='author-name'
-            label='Author Name'
-            type='text'
-            variant='outlined'
-            onChange={(event) => setAuthorName(event.target.value)}
-          />
-          <StyledInput
-            autoComplete='off'
-            id='author-age'
-            label='Author Age'
-            type='number'
-            variant='outlined'
-            onChange={(event) => setAuthorAge(event.target.value)}
-          />
-          <SubmitButton
-            variant='contained'
-            color='primary'
-            disabled={authorName && authorAge ? false : true}
-          >
-            Submit
-          </SubmitButton>
+          <Form onSubmit={(event) => handleAuthorSubmit(event)}>
+            <StyledInput
+              autoComplete='off'
+              id='author-name'
+              label='Author Name'
+              type='text'
+              variant='outlined'
+              onChange={(event) => setAuthorName(event.target.value)}
+            />
+            <StyledInput
+              autoComplete='off'
+              id='author-age'
+              label='Author Age'
+              type='number'
+              variant='outlined'
+              onChange={(event) => setAuthorAge(event.target.value)}
+            />
+            <SubmitButton
+              type='submit'
+              variant='contained'
+              color='primary'
+              disabled={authorName && authorAge ? false : true}
+            >
+              Submit
+            </SubmitButton>
+          </Form>
         </AuthorModal>
       ) : activeModal === 'book' ? (
         <BookModal>
           <CloseIconWrapper>
             <CloseIcon onClick={() => setShowModal(false)} />
           </CloseIconWrapper>
-          <StyledInput
-            autoComplete='off'
-            id='book-name'
-            label='Book Name'
-            type='text'
-            variant='outlined'
-            onChange={(event) => setBookName(event.target.value)}
-          />
-          <StyledInput
-            autoComplete='off'
-            id='book-genre'
-            label='Book Genre'
-            type='text'
-            variant='outlined'
-            onChange={(event) => setBookGenre(event.target.value)}
-          />
-          <StyledSelect
-            id='select-author'
-            label='Author Name'
-            variant='outlined'
-            select
-            SelectProps={{
-              native: true,
-            }}
-            helperText='Select author from the list'
-            onChange={(event) => setBookAuthor(event.target.value)}
-          >
-            <option value=''></option>
-            {data.authors.map((item, index) => (
-              <option key={index} value={item.name}>
-                {item.name}
-              </option>
-            ))}
-          </StyledSelect>
-          <SubmitButton
-            variant='contained'
-            color='primary'
-            disabled={bookName && bookGenre && bookAuthor ? false : true}
-          >
-            Submit
-          </SubmitButton>
+          <Form onSubmit={(event) => handleBookSubmit(event)}>
+            <StyledInput
+              autoComplete='off'
+              id='book-name'
+              label='Book Name'
+              type='text'
+              variant='outlined'
+              onChange={(event) => setBookName(event.target.value)}
+            />
+            <StyledInput
+              autoComplete='off'
+              id='book-genre'
+              label='Book Genre'
+              type='text'
+              variant='outlined'
+              onChange={(event) => setBookGenre(event.target.value)}
+            />
+            <StyledSelect
+              id='select-author'
+              label='Author Name'
+              variant='outlined'
+              select
+              SelectProps={{
+                native: true,
+              }}
+              helperText='Select author from the list'
+              onChange={(event) => setBookAuthor(event.target.value)}
+            >
+              <option value=''></option>
+              {data.authors.map((item, index) => (
+                <option key={index} value={item.id}>
+                  {item.name}
+                </option>
+              ))}
+            </StyledSelect>
+            <SubmitButton
+              type='submit'
+              variant='contained'
+              color='primary'
+              disabled={bookName && bookGenre && bookAuthor ? false : true}
+            >
+              Submit
+            </SubmitButton>
+          </Form>
         </BookModal>
       ) : null}
     </Overlay>
@@ -178,6 +233,10 @@ export const AddModal = styled.div`
   @media (max-width: 525px) {
     padding: 30px 15px 30px 15px;
   }
+`
+
+export const Form = styled.form`
+  text-align: center;
 `
 
 export const ButtonsWrapper = styled.div`
