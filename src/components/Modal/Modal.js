@@ -3,9 +3,12 @@ import styled from 'styled-components'
 import Button from '@material-ui/core/Button'
 import { CloseCircleOutline } from '@styled-icons/evaicons-outline/'
 import TextField from '@material-ui/core/TextField'
-import { useQuery, gql, useMutation } from '@apollo/client'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
+import { useQuery, useMutation } from '@apollo/client'
+import {
+  GET_ALL_AUTHORS,
+  ADD_AUTHOR,
+  ADD_BOOK,
+} from '../../GraphQLQueries/GraphQLQueries'
 
 export default function Modal({ setShowModal }) {
   const [activeModal, setActiveModal] = useState('add')
@@ -15,25 +18,11 @@ export default function Modal({ setShowModal }) {
   const [bookGenre, setBookGenre] = useState('')
   const [bookAuthor, setBookAuthor] = useState('')
 
-  const authors = gql`
-    query {
-      authors {
-        name
-        id
-      }
-    }
-  `
-  const { loading, error, data } = useQuery(authors)
+  const { loading, error, data } = useQuery(GET_ALL_AUTHORS)
 
-  const ADD_AUTHOR = gql`
-    mutation($name: String!, $age: Int!) {
-      addAuthor(name: $name, age: $age) {
-        name
-        age
-      }
-    }
-  `
   const [addAuthor] = useMutation(ADD_AUTHOR)
+
+  const [addBook] = useMutation(ADD_BOOK)
 
   function handleAuthorSubmit(event) {
     event.preventDefault()
@@ -47,16 +36,6 @@ export default function Modal({ setShowModal }) {
     setAuthorAge(0)
     setShowModal(false)
   }
-
-  const ADD_BOOK = gql`
-    mutation($name: String!, $genre: String!, $authorId: String!) {
-      addBook(name: $name, genre: $genre, authorId: $authorId) {
-        name
-        genre
-      }
-    }
-  `
-  const [addBook] = useMutation(ADD_BOOK)
 
   function handleBookSubmit(event) {
     event.preventDefault()

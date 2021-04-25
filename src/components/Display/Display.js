@@ -1,26 +1,12 @@
 import styled from 'styled-components'
-import { Card, Button } from '@material-ui/core'
-import { useQuery, gql } from '@apollo/client'
+import { Card } from '@material-ui/core'
+import { useQuery } from '@apollo/client'
+import { GET_BOOK } from '../../GraphQLQueries/GraphQLQueries'
 import Loader from 'react-loader-spinner'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 export default function BookList({ bookID }) {
-  const book = gql`
-    query($bookID: ID!) {
-      book(id: $bookID) {
-        name
-        genre
-        author {
-          name
-          books {
-            name
-          }
-        }
-      }
-    }
-  `
-
-  const { loading, error, data } = useQuery(book, {
+  const { loading, error, data } = useQuery(GET_BOOK, {
     variables: { bookID },
   })
 
