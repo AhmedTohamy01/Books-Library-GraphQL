@@ -69,7 +69,11 @@ export default function Modal({ setShowModal }) {
             variant='outlined'
             onChange={(event) => setAuthorAge(event.target.value)}
           />
-          <SubmitButton variant='contained' color='primary'>
+          <SubmitButton
+            variant='contained'
+            color='primary'
+            disabled={authorName && authorAge ? false : true}
+          >
             Submit
           </SubmitButton>
         </AuthorModal>
@@ -112,7 +116,11 @@ export default function Modal({ setShowModal }) {
               </option>
             ))}
           </StyledSelect>
-          <SubmitButton variant='contained' color='primary'>
+          <SubmitButton
+            variant='contained'
+            color='primary'
+            disabled={bookName && bookGenre && bookAuthor ? false : true}
+          >
             Submit
           </SubmitButton>
         </BookModal>
