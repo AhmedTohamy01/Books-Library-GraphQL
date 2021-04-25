@@ -5,6 +5,7 @@ import { CloseCircleOutline } from '@styled-icons/evaicons-outline/'
 import TextField from '@material-ui/core/TextField'
 import { useQuery, useMutation } from '@apollo/client'
 import {
+  GET_ALL_BOOKS,
   GET_ALL_AUTHORS,
   ADD_AUTHOR,
   ADD_BOOK,
@@ -20,9 +21,13 @@ export default function Modal({ setShowModal }) {
 
   const { loading, error, data } = useQuery(GET_ALL_AUTHORS)
 
-  const [addAuthor] = useMutation(ADD_AUTHOR)
+  const [addAuthor] = useMutation(ADD_AUTHOR, {
+    refetchQueries: [{ query: GET_ALL_AUTHORS }],
+  })
 
-  const [addBook] = useMutation(ADD_BOOK)
+  const [addBook] = useMutation(ADD_BOOK, {
+    refetchQueries: [{ query: GET_ALL_BOOKS }],
+  })
 
   function handleAuthorSubmit(event) {
     event.preventDefault()

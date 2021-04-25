@@ -46,7 +46,7 @@ export default function BookList({ bookID }) {
           <span>Author:</span> {data.book.author.name}
         </Text>
         <Text>
-          <span>Other Books for this Author:</span>{' '}
+          <span>All Books for this Author:</span>{' '}
         </Text>
         <List>
           {data.book.author.books.map((item) => (
