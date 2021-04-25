@@ -10,6 +10,8 @@ import {
   ADD_AUTHOR,
   ADD_BOOK,
 } from '../../GraphQLQueries/GraphQLQueries'
+import Loader from 'react-loader-spinner'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 export default function Modal({ setShowModal }) {
   const [activeModal, setActiveModal] = useState('add')
@@ -56,6 +58,35 @@ export default function Modal({ setShowModal }) {
     setBookAuthor('')
     setShowModal(false)
   }
+
+  if (loading)
+    return (
+      <>
+        <Overlay>
+          <AddModal>
+            <SpinnerWrapper>
+              <Loader
+                type='ThreeDots'
+                color='#3f51b5'
+                height={100}
+                width={100}
+              />
+            </SpinnerWrapper>
+          </AddModal>
+        </Overlay>
+      </>
+    )
+
+  if (error)
+    return (
+      <>
+        <Overlay>
+          <AddModal>
+            <ErrorText>We couldn't contact the server, we can't add data now. <br /> Please try again later !</ErrorText>
+          </AddModal>
+        </Overlay>
+      </>
+    )
 
   return (
     <Overlay>
@@ -167,6 +198,19 @@ export default function Modal({ setShowModal }) {
     </Overlay>
   )
 }
+
+export const SpinnerWrapper = styled.div`
+  /* border: 1px solid red; */
+  margin: auto;
+  display: flex;
+  align-items: center;
+`
+export const ErrorText = styled.p`
+  /* border: 1px solid red; */
+  margin: auto;
+  padding: 70px 35px;
+	text-align: center;
+`
 
 /*---> Styles <---*/
 export const Overlay = styled.div`
