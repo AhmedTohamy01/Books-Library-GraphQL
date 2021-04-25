@@ -129,55 +129,6 @@ export default function Modal({ setShowModal }) {
   )
 }
 
-export const AuthorModal = styled.div`
-  /* border: 1px solid yellow; */
-  margin: auto;
-  width: 40%;
-  max-width: 505px;
-  background-color: white;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-`
-
-export const BookModal = styled.div`
-  /* border: 1px solid yellow; */
-  margin: auto;
-  width: 40%;
-  max-width: 505px;
-  background-color: white;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-`
-
-export const StyledInput = styled(TextField)`
-  width: 70% !important;
-  height: 40px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  margin-bottom: 50px !important;
-`
-
-export const StyledSelect = styled(TextField)`
-  width: 70% !important;
-  /* height: 40px !important; */
-  margin-left: auto !important;
-  margin-right: auto !important;
-  margin-bottom: 50px !important;
-`
-
-export const SubmitButton = styled(Button)`
-  width: 70% !important;
-  height: 50px !important;
-  text-transform: capitalize !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  margin-bottom: 60px !important;
-`
-
 /*---> Styles <---*/
 export const Overlay = styled.div`
   /* border: 1px solid red; */
@@ -260,4 +211,53 @@ export const CloseIconWrapper = styled.div`
   /* border: 1px solid yellow; */
   text-align: right;
   padding: 15px;
+`
+
+export const AuthorModal = styled.div`
+  /* border: 1px solid yellow; */
+  margin: auto;
+  width: 40%;
+  max-width: 505px;
+  background-color: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+`
+
+export const BookModal = styled.div`
+  /* border: 1px solid yellow; */
+  margin: auto;
+  width: 40%;
+  max-width: 505px;
+  background-color: white;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+`
+
+export const StyledInput = styled(TextField)`
+  width: 70% !important;
+  height: 40px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 50px !important;
+`
+
+export const StyledSelect = styled(TextField)`
+  width: 70% !important;
+  /* height: 40px !important; */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 50px !important;
+`
+
+export const SubmitButton = styled(Button)`
+  width: 70% !important;
+  height: 50px !important;
+  text-transform: capitalize !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 60px !important;
 `
