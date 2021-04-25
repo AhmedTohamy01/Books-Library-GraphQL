@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import BookList from '../components/BookList/BookList'
 import Display from '../components/Display/Display'
 import { PlusCircle } from '@styled-icons/boxicons-solid/'
+import { AddCircle } from '@styled-icons/fluentui-system-filled/'
 import Modal from '../components/Modal/Modal'
 
 export default function HomaPage() {
@@ -56,7 +57,7 @@ export const RightWrapper = styled.div`
   padding: 30px;
 `
 
-export const AddIcon = styled(PlusCircle)`
+export const AddIcon = styled(AddCircle)`
   /* border: 1px solid black; */
   width: 70px;
   position: fixed;
