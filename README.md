@@ -143,7 +143,7 @@ npm start
 
 ```
 
-4) Now you can see the project in your browser. 
+3) Now you can see the project in your browser. 
 Happy Hacking!
 
 
