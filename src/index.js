@@ -6,7 +6,8 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',
+  // uri: 'http://localhost:5000/graphql',
+  uri: 'https://books-library-graphql-server.herokuapp.com/graphql',
   cache: new InMemoryCache(),
 })
 
