@@ -27,7 +27,6 @@ The project is a Book Library where you can explore available books and know a d
   - [Custom Error Message](#custom-error-message)
 - [Technology Used](#technology-used)
 - [How To Use](#how-to-use)
-- [Author](#author)
 
 
 # Project Walk-Through
@@ -146,10 +145,3 @@ npm start
 3) Now you can see the project in your browser. 
 Happy Hacking!
 
-
-# Author
-
-👤 **Ahmed Tohamy**
-- Github: https://github.com/AhmedTohamy01
-- Linkedin: https://www.linkedin.com/in/ATohamy
-- Email: Ahmed-Tohamy@outlook.com
